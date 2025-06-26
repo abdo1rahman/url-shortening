@@ -2,7 +2,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { useRef, useEffect } from "react";
 const THRESHOLD = 768;
 
-export default function Navbar({ activeMenu, setActiveMenu, windowWidth }) {
+export default function Navbar({
+  navOpen,
+  activeMenu,
+  setActiveMenu,
+  windowWidth,
+}) {
   const dropdownRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -12,7 +17,7 @@ export default function Navbar({ activeMenu, setActiveMenu, windowWidth }) {
     };
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  }, [setActiveMenu]);
   return (
     <nav>
       <div className="nav-start">
