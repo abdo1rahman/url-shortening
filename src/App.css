@@ -36,8 +36,6 @@ nav * {
 
 .nav-btn {
   border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 999px;
   font-weight: 700;
 }
 
@@ -52,6 +50,8 @@ nav * {
 
 .signup {
   color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
   background-color: var(--cyan);
 }
 
@@ -66,4 +66,15 @@ nav * {
   border-radius: 5px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+}
+
+@media (max-width: 1000px) {
+  nav {
+    padding: 1rem 2rem;
+  }
+
+  .nav-start,
+  .links {
+    gap: 1.5rem;
+  }
 }
