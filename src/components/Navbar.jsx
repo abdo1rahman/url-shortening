@@ -75,9 +75,7 @@ export default function Navbar({
             </div>
           </div>
         ) : (
-          <div onClick={() => toggleNav(!navOpen)}>
-            <HamBtn />
-          </div>
+          <HamBtn navOpen={navOpen} toggleNav={toggleNav} />
         )}
       </div>
       {windowWidth > THRESHOLD && (
