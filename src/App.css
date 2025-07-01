@@ -26,7 +26,7 @@ nav * {
 }
 
 .links *:hover {
-  color: var(--dark-violet);
+  color: var(--darker-violet);
 }
 
 .nav-end {
@@ -45,7 +45,7 @@ nav * {
 }
 
 .login:hover {
-  color: var(--dark-violet);
+  color: var(--darker-violet);
 }
 
 .signup {
@@ -71,8 +71,10 @@ nav * {
 .ham-nav {
   width: 90vw;
   box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.329);
+  background-color: var(--dark-violet);
+  color: white;
   border-radius: 10px;
-  padding: 4rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,6 +82,37 @@ nav * {
   height: fit-content;
   position: fixed;
   z-index: 1000;
+}
+
+.list-title {
+  font-weight: 800;
+}
+
+.ham-links {
+  text-align: center;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+hr {
+  width: 80%;
+  border: 0.1px solid var(--light-violet);
+  height: 0;
+}
+
+.sm-login {
+  color: white;
+  font-size: 18px;
+}
+
+.sm-signup {
+  width: 80%;
+  padding: 1rem 0;
+  font-size: 18px;
 }
 
 @media (max-width: 1000px) {

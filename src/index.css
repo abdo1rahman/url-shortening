@@ -9,8 +9,9 @@
   /* Neutural */
   --light-gray: hsl(0, 0%, 75%);
   --grayish-violet: hsl(257, 7%, 63%);
+  --light-violet: hsl(259, 11%, 39%);
   --dark-blue: hsl(255, 11%, 22%);
-  --dark-violet: hsl(260, 8%, 14%);
+  --darker-violet: hsl(260, 8%, 14%);
 }
 
 body,
