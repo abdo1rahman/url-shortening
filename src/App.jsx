@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar.jsx";
 import HamNav from "./components/HamNav.jsx";
+import Hero from "./components/Hero.jsx";
 
 import { useState, useEffect } from "react";
 import "./App.css";
@@ -38,6 +39,7 @@ function App() {
       {navOpen && (
         <HamNav activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
       )}
+      <Hero />
     </div>
   );
 }
