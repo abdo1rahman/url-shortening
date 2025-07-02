@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar.jsx";
 import HamNav from "./components/HamNav.jsx";
 import Hero from "./components/Hero.jsx";
+import UrlForm from "./components/UrlForm.jsx";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import "./App.css";
 
 const THRESHOLD = 768;
@@ -36,10 +38,21 @@ function App() {
         windowWidth={windowWidth}
         toggleNav={toggleNav}
       />
-      {navOpen && (
-        <HamNav activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-      )}
+      <AnimatePresence>
+        {navOpen && (
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            exit={{ scaleY: 0 }}
+            style={{ transformOrigin: "top" }}
+            transition={{ duration: 0.2 }}
+          >
+            <HamNav activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Hero />
+      <UrlForm />
     </div>
   );
 }
