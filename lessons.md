@@ -8,16 +8,18 @@
 
    - Load from `localStorage`:
 
-   ````
+   ```
       const [item, setItem] = useState(() =>{
         // loading from storage:
         const stored = localStorage.getItem("valueName")
         return stored ? JSON.parse(stored) : "empty state of valueName" // <- could be an empty array [], string "", etc.
-        });```
+        });
+   ```
 
    - Saving state to storage:
-   ```useEffect(()=> {
+   ```
+   useEffect(()=> {
     localStorage.setItem(JSON.stringfy(item));
    }, [item]);
    ```
-   ````
+   
