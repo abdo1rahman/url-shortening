@@ -17,9 +17,11 @@
    ```
 
    - Saving state to storage:
+
    ```
    useEffect(()=> {
     localStorage.setItem(JSON.stringfy(item));
    }, [item]);
    ```
-   
+
+3. When making updatable elements, **_always_** let React do the updates. For example, instead of `element.classList.toggle()`, add or remove the class based on a React state.
