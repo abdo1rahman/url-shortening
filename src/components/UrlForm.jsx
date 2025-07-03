@@ -1,40 +1,43 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
-  const [results, setResults] = useState([]); // ✅ state!
+  const [results, setResults] = useState(() => {
+    // Making sure the state of the shortened links persists even after page reload
+    // Load from localStorage on first render
+    const stored = localStorage.getItem("shortenedResults");
+    return stored ? JSON.parse(stored) : [];
+  });
+  // Saving new items inside the `results` array
+  useEffect(() => {
+    localStorage.setItem("shortenedResults", JSON.stringify(results));
+  }, [results]);
 
-  function handleChange(e) {
-    setUrl(e.target.value);
-  }
+  const handleChange = (e) => setUrl(e.target.value);
 
   const handleClick = (e) => {
     e.preventDefault();
     const longUrl = url.trim();
-    const urlEncoded = encodeURIComponent(longUrl);
+    if (!longUrl) return;
 
     fetch("http://localhost:3001/shorten", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `url=${urlEncoded}`,
+      body: `url=${encodeURIComponent(longUrl)}`,
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.result_url) {
           const shortUrl = data.result_url;
-
-          // ✅ Update the state
           setResults((prev) => [...prev, [longUrl, shortUrl]]);
-          setUrl(""); // optional: clear the input
+          setUrl("");
         } else {
           console.error("API error:", data.error);
         }
       })
-      .catch((err) => {
-        console.error("Network error:", err);
-      });
+      .catch((err) => console.error("Network error:", err));
   };
 
   return (
@@ -48,15 +51,14 @@ export default function UrlForm() {
             onChange={handleChange}
             placeholder="Shorten a link here..."
           />
-          <button type="submit" onClick={handleClick} className="shorten">
+          <button className="shorten" onClick={handleClick}>
             Shorten it!
           </button>
         </div>
       </div>
 
-      {/* ✅ Show results */}
-      {results.map(([long, short], index) => (
-        <div className="result" key={index}>
+      {results.map(([long, short], i) => (
+        <div className="result" key={i}>
           <p className="long-url">{long}</p>
           <div>
             <p className="short-url">{short}</p>
