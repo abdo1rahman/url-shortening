@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState([]); // ✅ state!
 
   function handleChange(e) {
     setUrl(e.target.value);
   }
 
   const handleClick = (e) => {
-    e.preventDefault(); // optional if used inside a form
+    e.preventDefault();
     const longUrl = url.trim();
-
-    if (!longUrl) return;
-
     const urlEncoded = encodeURIComponent(longUrl);
 
-    fetch("/api/shorten", {
+    fetch("http://localhost:3001/shorten", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: `url=${urlEncoded}`,
     })
-      .then((res) => {
-        let result = res.body.result_url;
-        setResults([...results, [longUrl, result]]);
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result_url) {
+          const shortUrl = data.result_url;
+
+          // ✅ Update the state
+          setResults((prev) => [...prev, [longUrl, shortUrl]]);
+          setUrl(""); // optional: clear the input
+        } else {
+          console.error("API error:", data.error);
+        }
       })
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error("Network error:", err);
+      });
   };
 
   return (
@@ -48,23 +54,21 @@ export default function UrlForm() {
         </div>
       </div>
 
-      {results.length > 0 &&
-        results.map((result, index) => (
-          <div className="result" key={index}>
-            <p className="long-url"> {result[0]} </p>
-            <div>
-              <p className="short-url"> {result[1]} </p>
-              <button
-                className="copy"
-                onClick={() => {
-                  navigator.clipboard.writeText(result[1]);
-                }}
-              >
-                Copy
-              </button>
-            </div>
+      {/* ✅ Show results */}
+      {results.map(([long, short], index) => (
+        <div className="result" key={index}>
+          <p className="long-url">{long}</p>
+          <div>
+            <p className="short-url">{short}</p>
+            <button
+              className="copy"
+              onClick={() => navigator.clipboard.writeText(short)}
+            >
+              Copy
+            </button>
           </div>
-        ))}
+        </div>
+      ))}
     </>
   );
 }
