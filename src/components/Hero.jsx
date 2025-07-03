@@ -1,3 +1,4 @@
+import GetStarted from "./GetStarted.jsx";
 export default function Hero() {
   const THRESHOLD = 768;
   return (
@@ -8,7 +9,7 @@ export default function Hero() {
           Build your brand’s recognition and get detailed insights on how your
           links are performing.
         </p>
-        <a className="hero-btn btn">Get Started</a>
+        <GetStarted />
       </div>
       <img
         src="/images/illustration-working.svg"

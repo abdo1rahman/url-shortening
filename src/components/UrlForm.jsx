@@ -18,6 +18,8 @@ export default function UrlForm() {
   const handleClick = (e) => {
     e.preventDefault();
     const longUrl = url.trim();
+    const url40 = longUrl.length > 40 ? longUrl.slice(0, 40) + "..." : longUrl;
+
     if (!longUrl) return;
 
     fetch("http://localhost:3001/shorten", {
@@ -31,7 +33,7 @@ export default function UrlForm() {
       .then((data) => {
         if (data.result_url) {
           const shortUrl = data.result_url;
-          setResults((prev) => [...prev, [longUrl, shortUrl]]);
+          setResults((prev) => [...prev, [url40, shortUrl]]);
           setUrl("");
         } else {
           console.error("API error:", data.error);
@@ -39,6 +41,28 @@ export default function UrlForm() {
       })
       .catch((err) => console.error("Network error:", err));
   };
+
+  function copy(event, link) {
+    const btn = event.target;
+    btn.disabled = true;
+
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        btn.classList.add("copied");
+        btn.textContent = "Copied!";
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          btn.textContent = "Copy";
+          btn.disabled = false;
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error("Copy failed:", err);
+        alert("Failed to copy link.");
+        btn.disabled = false;
+      });
+  }
 
   return (
     <>
@@ -64,7 +88,8 @@ export default function UrlForm() {
             <p className="short-url">{short}</p>
             <button
               className="copy"
-              onClick={() => navigator.clipboard.writeText(short)}
+              aria-live="polite"
+              onClick={(event) => copy(event, short)}
             >
               Copy
             </button>

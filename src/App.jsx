@@ -51,8 +51,10 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Hero />
-      <UrlForm />
+      <main>
+        <Hero />
+        <UrlForm />
+      </main>
     </div>
   );
 }
