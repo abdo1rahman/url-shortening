@@ -167,6 +167,8 @@ hr {
     white 0px 4rem,
     hsl(from var(--light-gray) h s l / 0.4) 4rem 100%
   );
+  overflow: hidden;
+  height: fit-content;
 }
 
 .form-container {
@@ -287,6 +289,72 @@ hr {
   background-color: var(--dark-violet);
 }
 
+.features-section {
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.features-section .features-title {
+  text-align: center;
+  width: 30rem;
+}
+
+.features-section .features-title h2 {
+  font-size: 30px;
+}
+
+.features {
+  display: flex;
+  gap: 2rem;
+}
+
+.feature {
+  position: relative;
+  background-color: white;
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+.icon {
+  background-color: var(--dark-violet);
+  width: fit-content;
+  height: auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  top: -3rem;
+}
+
+.feature h4 {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.feature p {
+  color: var(--grayish-violet);
+}
+
+#feature2 {
+  top: 3rem;
+}
+
+#feature3 {
+  top: 6rem;
+}
+
+.features-ribbon {
+  position: relative;
+  bottom: 11rem;
+  z-index: -1;
+  border: 3px solid var(--cyan);
+}
+
 @media (max-width: 1000px) {
   nav {
     padding: 1rem 2rem;
@@ -299,6 +367,26 @@ hr {
   .nav-start,
   .links {
     gap: 1.5rem;
+  }
+
+  .features-section {
+    padding: 5rem 2rem;
+  }
+
+  .features-section .features {
+    gap: 1rem;
+  }
+
+  .feature {
+    padding: 2rem 1rem;
+  }
+
+  .feature > h4 {
+    font-size: 16px !important; /** This is because the above h4 selection is more specific */
+  }
+
+  .feature > p {
+    font-size: 12px;
   }
 }
 
@@ -353,6 +441,39 @@ hr {
 
   .hero-txt {
     order: 1;
+  }
+
+  .features-section .features-title p {
+    font-size: 13px;
+    padding: 0 2rem;
+    align-self: center;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .feature > h4 {
+    font-size: 20px !important;
+  }
+
+  .feature > p {
+    font-size: 16px;
+  }
+
+  .features-ribbon {
+    transform: rotate(90deg);
+    position: absolute;
+    width: 40rem;
+    bottom: 20rem;
   }
 }
 
