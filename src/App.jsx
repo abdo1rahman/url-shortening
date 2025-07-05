@@ -3,6 +3,7 @@ import HamNav from "./components/HamNav.jsx";
 import Hero from "./components/Hero.jsx";
 import UrlForm from "./components/UrlForm.jsx";
 import GetStarted from "./components/GetStarted.jsx";
+import Footer from "./components/Footer.jsx";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -110,6 +111,7 @@ function App() {
           <GetStarted />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

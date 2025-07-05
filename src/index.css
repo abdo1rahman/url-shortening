@@ -12,6 +12,7 @@
   --light-violet: hsl(259, 11%, 39%);
   --dark-blue: hsl(255, 11%, 22%);
   --darker-violet: hsl(260, 8%, 14%);
+  --violet: rgb(203, 26, 123);
 }
 
 body,
@@ -21,8 +22,4 @@ html {
   background-color: white;
   overflow-x: hidden;
   margin: 0;
-}
-
-.no-scroll {
-  overflow: hidden;
 }
