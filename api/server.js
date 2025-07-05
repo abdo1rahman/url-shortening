@@ -10,9 +10,9 @@ const PORT = 3001;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/test", (req, res) => {
-  res.send("Server is working.");
-});
+// app.get("/test", (req, res) => {
+//   res.send("Server is working.");
+// });
 
 app.post("/shorten", async (req, res) => {
   const longUrl = req.body.url;

@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar.jsx";
 import HamNav from "./components/HamNav.jsx";
 import Hero from "./components/Hero.jsx";
 import UrlForm from "./components/UrlForm.jsx";
+import GetStarted from "./components/GetStarted.jsx";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -104,6 +105,10 @@ function App() {
             <hr className="features-ribbon" />
           </section>
         </div>
+        <section className="boost">
+          <h2>Boost your links today</h2>
+          <GetStarted />
+        </section>
       </main>
     </div>
   );

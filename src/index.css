@@ -3,7 +3,6 @@
   /* Primary */
   --cyan: hsl(180, 66%, 49%);
   --translucent-cyan: hsla(180, 66%, 49%, 0.61);
-  --light-cyan: hsl(180, 98%, 67%);
   --dark-violet: hsl(257, 27%, 26%);
   /* Secondary */
   --error: hsl(0, 87%, 67%);

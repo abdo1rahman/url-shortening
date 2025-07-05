@@ -162,12 +162,14 @@ hr {
 }
 
 .gray {
+  position: relative;
   background: linear-gradient(
     to bottom,
     white 0px 4rem,
     hsl(from var(--light-gray) h s l / 0.4) 4rem 100%
   );
-  overflow: hidden;
+  /* overflow: hidden; */
+  padding-bottom: 5rem;
   height: fit-content;
 }
 
@@ -237,7 +239,7 @@ hr {
 }
 
 .shorten:hover {
-  background-color: var(--light-cyan);
+  background-color: var(--translucent-cyan);
 }
 
 .result {
@@ -353,6 +355,21 @@ hr {
   bottom: 11rem;
   z-index: -1;
   border: 3px solid var(--cyan);
+}
+
+.boost {
+  background: url(/images/bg-boost-desktop.svg);
+  background-color: var(--dark-violet);
+  height: 15rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.boost h2 {
+  font-size: 28px;
 }
 
 @media (max-width: 1000px) {
@@ -473,7 +490,7 @@ hr {
     transform: rotate(90deg);
     position: absolute;
     width: 40rem;
-    bottom: 20rem;
+    bottom: 30rem;
   }
 }
 
