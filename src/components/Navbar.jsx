@@ -34,7 +34,23 @@ export default function Navbar({
                 setActiveMenu(activeMenu === "features" ? "" : "features")
               }
             >
-              <span className="list-title">Features</span>
+              <div className="list-title">
+                <span>Features</span>
+                <svg
+                  className="arrow"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="7"
+                >
+                  <path
+                    fill="none"
+                    stroke-width="2"
+                    opacity=".75"
+                    d="M1 1l4 4 4-4"
+                  />
+                </svg>
+              </div>
+
               <AnimatePresence>
                 {activeMenu === "features" && (
                   <motion.div
@@ -54,11 +70,29 @@ export default function Navbar({
             </div>
             <div
               className="menu"
-              onClick={() =>
-                setActiveMenu(activeMenu === "resources" ? "" : "resources")
-              }
+              onClick={() => {
+                setActiveMenu(activeMenu === "resources" ? "" : "resources");
+                document.getElementById("arrow2").classList.toggle("rotate");
+              }}
             >
-              <span className="list-title">Resources</span>
+              <div className="list-title">
+                <span>Resources</span>
+                <svg
+                  className="arrow"
+                  id="arrow2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="7"
+                >
+                  <path
+                    fill="none"
+                    stroke-width="2"
+                    opacity=".75"
+                    d="M1 1l4 4 4-4"
+                  />
+                </svg>
+              </div>
+
               <AnimatePresence>
                 {activeMenu === "resources" && (
                   <motion.div
