@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
+  const [inputError, setInputError] = useState(false);
+  // Making sure the state of the shortened links persists even after page reload
   const [results, setResults] = useState(() => {
-    // Making sure the state of the shortened links persists even after page reload
     // Load from localStorage on first render
     const stored = localStorage.getItem("shortenedResults");
     return stored ? JSON.parse(stored) : [];
   });
+
   // Saving new items inside the `results` array
   useEffect(() => {
     localStorage.setItem("shortenedResults", JSON.stringify(results));
@@ -17,29 +19,33 @@ export default function UrlForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const longUrl = url.trim();
-    const url40 = longUrl.length > 40 ? longUrl.slice(0, 40) + "..." : longUrl;
+    if (url.length > 0) {
+      setInputError(false);
+      const longUrl = url.trim();
+      const url40 =
+        longUrl.length > 40 ? longUrl.slice(0, 40) + "..." : longUrl;
 
-    if (!longUrl) return;
+      if (!longUrl) return;
 
-    fetch("http://localhost:3001/shorten", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `url=${encodeURIComponent(longUrl)}`,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result_url) {
-          const shortUrl = data.result_url;
-          setResults((prev) => [...prev, [url40, shortUrl]]);
-          setUrl("");
-        } else {
-          console.error("API error:", data.error);
-        }
+      fetch("http://localhost:3001/shorten", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `url=${encodeURIComponent(longUrl)}`,
       })
-      .catch((err) => console.error("Network error:", err));
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.result_url) {
+            const shortUrl = data.result_url;
+            setResults((prev) => [...prev, [url40, shortUrl]]);
+            setUrl("");
+          } else {
+            console.error("API error:", data.error);
+          }
+        })
+        .catch((err) => console.error("Network error:", err));
+    } else setInputError(true);
   };
 
   function copy(event, link) {
@@ -70,11 +76,15 @@ export default function UrlForm() {
         <div className="url-form">
           <input
             id="url-input"
+            className={inputError && "error"}
             type="text"
             value={url}
             onChange={handleChange}
             placeholder="Shorten a link here..."
+            required
           />
+          {inputError && <p className="error-msg">Please add a link</p>}
+
           <button className="shorten" onClick={handleClick}>
             Shorten it!
           </button>
@@ -84,6 +94,7 @@ export default function UrlForm() {
       {results.map(([long, short], i) => (
         <div className="result" key={i}>
           <p className="long-url">{long}</p>
+          <hr className="links-hr" />
           <div>
             <p className="short-url">{short}</p>
             <button

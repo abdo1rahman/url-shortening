@@ -21,4 +21,9 @@ html {
   z-index: -1000;
   background-color: white;
   overflow-x: hidden;
+  margin: 0;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

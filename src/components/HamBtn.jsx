@@ -3,6 +3,7 @@ import "./HamBtn.css";
 export default function HamBtn({ navOpen, toggleNav }) {
   function toggleState() {
     toggleNav((prev) => !prev);
+    document.querySelector(".app").classList.toggle("no-scroll");
   }
 
   return (

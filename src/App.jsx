@@ -53,7 +53,9 @@ function App() {
       </AnimatePresence>
       <main>
         <Hero />
-        <UrlForm />
+        <div className="gray">
+          <UrlForm />
+        </div>
       </main>
     </div>
   );
