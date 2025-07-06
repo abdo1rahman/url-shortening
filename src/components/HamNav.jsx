@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 
 export default function HamNav({ activeMenu, setActiveMenu }) {
   const dropdownRef = useRef(null);
-  const hamArrow1 = document.getElementById("ham-arrow1");
-  const hamArrow2 = document.getElementById("ham-arrow2");
+  const hamArrow1Ref = useRef(null);
+  const hamArrow2Ref = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -22,8 +22,12 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
         className="mobile-menu"
         onClick={() => {
           setActiveMenu(activeMenu === "features" ? "" : "features");
-          hamArrow1.classList.toggle("rotate");
-          hamArrow2.classList.remove("rotate");
+          if (hamArrow1Ref.current) {
+            hamArrow1Ref.current.classList.toggle("rotate");
+          }
+          if (hamArrow2Ref.current) {
+            hamArrow2Ref.current.classList.remove("rotate");
+          }
         }}
       >
         <div className="arrowed-title">
@@ -31,6 +35,7 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
           <svg
             className="ham-arrow"
             id="ham-arrow1"
+            ref={hamArrow1Ref}
             xmlns="http://www.w3.org/2000/svg"
             width="10"
             height="7"
@@ -63,8 +68,12 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
         className="mobile-menu"
         onClick={() => {
           setActiveMenu(activeMenu === "resources" ? "" : "resources");
-          hamArrow1.classList.remove("rotate");
-          hamArrow2.classList.toggle("rotate");
+          if (hamArrow1Ref.current) {
+            hamArrow1Ref.current.classList.remove("rotate");
+          }
+          if (hamArrow2Ref.current) {
+            hamArrow2Ref.current.classList.toggle("rotate");
+          }
         }}
       >
         <div className="arrowed-title">
@@ -72,6 +81,7 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
           <svg
             className="ham-arrow"
             id="ham-arrow2"
+            ref={hamArrow2Ref}
             xmlns="http://www.w3.org/2000/svg"
             width="10"
             height="7"

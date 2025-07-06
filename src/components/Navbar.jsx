@@ -12,8 +12,8 @@ export default function Navbar({
   toggleNav,
 }) {
   const dropdownRef = useRef(null);
-  const arrow1 = document.getElementById("arrow1");
-  const arrow2 = document.getElementById("arrow2");
+  const arrow1Ref = useRef(null);
+  const arrow2Ref = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,15 +37,20 @@ export default function Navbar({
               className="menu"
               onClick={() => {
                 setActiveMenu(activeMenu === "features" ? "" : "features");
-                arrow1.classList.toggle("rotate");
-                arrow2.classList.remove("rotate");
+                if (arrow1Ref.current) {
+                  arrow1Ref.current.classList.toggle("rotate");
+                }
+                if (arrow2Ref.current) {
+                  arrow2Ref.current.classList.remove("rotate");
+                }
               }}
             >
               <div className="list-title">
                 <span>Features</span>
                 <svg
                   className="arrow"
-                  id="arrow1"
+                  id="arrow1Ref"
+                  ref={arrow1Ref}
                   xmlns="http://www.w3.org/2000/svg"
                   width="10"
                   height="7"
@@ -83,15 +88,20 @@ export default function Navbar({
               className="menu"
               onClick={() => {
                 setActiveMenu(activeMenu === "resources" ? "" : "resources");
-                arrow1.classList.remove("rotate");
-                arrow2.classList.toggle("rotate");
+                if (arrow1Ref.current) {
+                  arrow1Ref.current.classList.remove("rotate");
+                }
+                if (arrow2Ref.current) {
+                  arrow2Ref.current.classList.toggle("rotate");
+                }
               }}
             >
               <div className="list-title">
                 <span>Resources</span>
                 <svg
                   className="arrow"
-                  id="arrow2"
+                  id="arrow2Ref"
+                  ref={arrow2Ref}
                   xmlns="http://www.w3.org/2000/svg"
                   width="10"
                   height="7"

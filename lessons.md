@@ -1,6 +1,6 @@
 # Lessons learned during in this project:
 
-1. In React, we prefer to use `useRef` instead of `document.getElementById()` because the latter accesses the DOM element **_before_** rendering, which will render them `null`
+1. In React, we prefer to use `useRef` instead of `document.getElementById()` because the latter accesses the DOM element **_before_** rendering, which will render them `null`, and then when trying to manipulate said element, check `if (elementRef.current)` first.
 
 2. If you want a particular state to persist _*even after page refresh*_ Simpy save it to `localStorage`
 
