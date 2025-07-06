@@ -95,14 +95,14 @@ nav * {
   stroke: black;
 }
 
-.list-item {
+.nav-link {
   color: white;
   padding: 1rem;
   width: 100%;
   margin: 0;
 }
 
-.list-item:hover {
+.nav-link:hover {
   background-color: var(--cyan);
 }
 
@@ -121,6 +121,20 @@ nav * {
   position: fixed;
   left: 5vw;
   z-index: 1000;
+}
+
+.arrowed-title {
+  position: relative;
+  left: 4px;
+}
+
+.ham-arrow {
+  stroke: white;
+  margin-left: 5px;
+}
+
+.ham-arrow > path {
+  stroke-width: 3px;
 }
 
 .list-title {
@@ -184,6 +198,7 @@ hr {
   border: none;
   font-size: 18px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -623,6 +638,11 @@ footer {
     width: 82vw;
     padding: 1rem;
     font-size: 20px;
+  }
+  .boost {
+    background: url(/images/bg-boost-mobile.svg);
+    background-size: cover;
+    background-color: var(--dark-violet);
   }
 }
 

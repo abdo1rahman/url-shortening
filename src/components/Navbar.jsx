@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { useRef, useEffect } from "react";
 
 const THRESHOLD = 768;
+const arrow1 = document.getElementById("arrow1");
+const arrow2 = document.getElementById("arrow2");
 
 export default function Navbar({
   navOpen,
@@ -13,15 +15,19 @@ export default function Navbar({
   toggleNav,
 }) {
   const dropdownRef = useRef(null);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setActiveMenu("");
+        let arrows = document.querySelectorAll(".arrow");
+        arrows.forEach((arrow) => arrow.classList.remove("rotate"));
       }
     };
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [setActiveMenu]);
+
   return (
     <nav>
       <div className="nav-start">
@@ -30,14 +36,17 @@ export default function Navbar({
           <div className="links" ref={dropdownRef}>
             <div
               className="menu"
-              onClick={() =>
-                setActiveMenu(activeMenu === "features" ? "" : "features")
-              }
+              onClick={() => {
+                setActiveMenu(activeMenu === "features" ? "" : "features");
+                arrow1.classList.add("rotate");
+                arrow2.classList.remove("rotate");
+              }}
             >
               <div className="list-title">
                 <span>Features</span>
                 <svg
                   className="arrow"
+                  id="arrow1"
                   xmlns="http://www.w3.org/2000/svg"
                   width="10"
                   height="7"
@@ -54,13 +63,16 @@ export default function Navbar({
               <AnimatePresence>
                 {activeMenu === "features" && (
                   <motion.div
-                    key="modal"
-                    exit={{ opacity: 0 }}
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    exit={{ scaleY: 0 }}
+                    style={{ transformOrigin: "top" }}
+                    transition="0.1s"
                     className="dropdown-menu"
                   >
-                    <p className="list-item">Link Shortening</p>
-                    <p className="list-item">Branded Links</p>
-                    <p className="list-item">Analytics</p>
+                    <p className="nav-link">Link Shortening</p>
+                    <p className="nav-link">Branded Links</p>
+                    <p className="nav-link">Analytics</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -72,7 +84,8 @@ export default function Navbar({
               className="menu"
               onClick={() => {
                 setActiveMenu(activeMenu === "resources" ? "" : "resources");
-                document.getElementById("arrow2").classList.toggle("rotate");
+                arrow1.classList.remove("rotate");
+                arrow2.classList.add("rotate");
               }}
             >
               <div className="list-title">
@@ -96,13 +109,15 @@ export default function Navbar({
               <AnimatePresence>
                 {activeMenu === "resources" && (
                   <motion.div
-                    key="modal"
-                    exit={{ opacity: 0 }}
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    exit={{ scaleY: 0 }}
+                    style={{ transformOrigin: "top" }}
                     className="dropdown-menu"
                   >
-                    <p className="list-item">Blog</p>
-                    <p className="list-item">Developers</p>
-                    <p className="list-item">Support</p>
+                    <p className="nav-link">Blog</p>
+                    <p className="nav-link">Developers</p>
+                    <p className="nav-link">Support</p>
                   </motion.div>
                 )}
               </AnimatePresence>

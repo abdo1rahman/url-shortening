@@ -1,6 +1,9 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useRef } from "react";
 
+const hamArrow1 = document.getElementById("ham-arrow1");
+const hamArrow2 = document.getElementById("ham-arrow2");
+
 export default function HamNav({ activeMenu, setActiveMenu }) {
   const dropdownRef = useRef(null);
   useEffect(() => {
@@ -17,11 +20,24 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
     <div className="ham-nav" ref={dropdownRef}>
       <div
         className="mobile-menu"
-        onClick={() =>
-          setActiveMenu(activeMenu === "features" ? "" : "features")
-        }
+        onClick={() => {
+          setActiveMenu(activeMenu === "features" ? "" : "features");
+          hamArrow1.classList.add("rotate");
+          hamArrow2.classList.remove("rotate");
+        }}
       >
-        <span className="list-title">Features</span>
+        <div className="arrowed-title">
+          <span className="list-title">Features</span>
+          <svg
+            className="ham-arrow"
+            id="ham-arrow1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="7"
+          >
+            <path fill="none" stroke-width="2" opacity=".75" d="M1 1l4 4 4-4" />
+          </svg>
+        </div>
         <div className="ham-links">
           <AnimatePresence>
             {activeMenu === "features" && (
@@ -45,11 +61,24 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
       </div>
       <div
         className="mobile-menu"
-        onClick={() =>
-          setActiveMenu(activeMenu === "resources" ? "" : "resources")
-        }
+        onClick={() => {
+          setActiveMenu(activeMenu === "resources" ? "" : "resources");
+          hamArrow1.classList.remove("rotate");
+          hamArrow2.classList.add("rotate");
+        }}
       >
-        <span className="list-title">Resources</span>
+        <div className="arrowed-title">
+          <span className="list-title">Resources</span>
+          <svg
+            className="ham-arrow"
+            id="ham-arrow2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="7"
+          >
+            <path fill="none" stroke-width="2" opacity=".75" d="M1 1l4 4 4-4" />
+          </svg>
+        </div>
         <div className="ham-links">
           <AnimatePresence>
             {activeMenu === "resources" && (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
@@ -72,7 +73,7 @@ export default function UrlForm() {
 
   return (
     <>
-      <div className="form-container">
+      <div id="form-container" className="form-container">
         <div className="url-form">
           <input
             id="url-input"
@@ -91,22 +92,32 @@ export default function UrlForm() {
         </div>
       </div>
 
-      {results.map(([long, short], i) => (
-        <div className="result" key={i}>
-          <p className="long-url">{long}</p>
-          <hr className="links-hr" />
-          <div>
-            <p className="short-url">{short}</p>
-            <button
-              className="copy"
-              aria-live="polite"
-              onClick={(event) => copy(event, short)}
-            >
-              Copy
-            </button>
-          </div>
-        </div>
-      ))}
+      <AnimatePresence>
+        {results.map(([long, short], i) => (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition="0.2s"
+            // style={{ transformOrigin: "top" }}
+            className="result"
+            key={i}
+          >
+            <p className="long-url">{long}</p>
+            <hr className="links-hr" />
+            <div>
+              <p className="short-url">{short}</p>
+              <button
+                className="copy"
+                aria-live="polite"
+                onClick={(event) => copy(event, short)}
+              >
+                Copy
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </>
   );
 }

@@ -1,3 +1,7 @@
 export default function GetStarted() {
-  return <button className="hero-btn btn">Get Started</button>;
+  return (
+    <a href="#form-container" className="hero-btn btn">
+      Get Started
+    </a>
+  );
 }

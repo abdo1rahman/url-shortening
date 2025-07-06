@@ -3,9 +3,10 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import bodyParser from "body-parser";
+import process from "process";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
