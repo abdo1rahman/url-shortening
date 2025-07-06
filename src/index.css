@@ -24,3 +24,24 @@ html {
   margin: 0;
   scroll-behavior: smooth;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff00;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  /* border-radius: 10px; */
+  background: var(--dark-violet);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-blue);
+}

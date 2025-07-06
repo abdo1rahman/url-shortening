@@ -16,6 +16,12 @@ function App() {
   const [activeMenu, setActiveMenu] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  fetch("/test", {
+    method: "GET",
+  })
+    .then(() => console.log("Server Success"))
+    .catch((error) => console.error("Server error:", error));
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Loader from "./Loader.jsx";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
   const [inputError, setInputError] = useState(false);
+  const [loading, setLoading] = useState(false);
   // Making sure the state of the shortened links persists even after page reload
   const [results, setResults] = useState(() => {
     // Load from localStorage on first render
@@ -21,6 +23,7 @@ export default function UrlForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (url.length > 0) {
+      setLoading(true);
       setInputError(false);
       const longUrl = url.trim();
       const url40 =
@@ -28,7 +31,7 @@ export default function UrlForm() {
 
       if (!longUrl) return;
 
-      fetch("http://localhost:3001/shorten", {
+      fetch("https://shortly-api-78zc.onrender.com/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -41,6 +44,7 @@ export default function UrlForm() {
             const shortUrl = data.result_url;
             setResults((prev) => [...prev, [url40, shortUrl]]);
             setUrl("");
+            setLoading(false);
           } else {
             console.error("API error:", data.error);
           }
@@ -87,7 +91,7 @@ export default function UrlForm() {
           {inputError && <p className="error-msg">Please add a link</p>}
 
           <button className="shorten" onClick={handleClick}>
-            Shorten it!
+            {loading ? <Loader /> : "Shorten it!"}
           </button>
         </div>
       </div>
@@ -99,7 +103,6 @@ export default function UrlForm() {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             transition="0.2s"
-            // style={{ transformOrigin: "top" }}
             className="result"
             key={i}
           >

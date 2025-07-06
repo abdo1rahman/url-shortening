@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useRef } from "react";
 
-const hamArrow1 = document.getElementById("ham-arrow1");
-const hamArrow2 = document.getElementById("ham-arrow2");
-
 export default function HamNav({ activeMenu, setActiveMenu }) {
   const dropdownRef = useRef(null);
+  const hamArrow1 = document.getElementById("ham-arrow1");
+  const hamArrow2 = document.getElementById("ham-arrow2");
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -22,7 +22,7 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
         className="mobile-menu"
         onClick={() => {
           setActiveMenu(activeMenu === "features" ? "" : "features");
-          hamArrow1.classList.add("rotate");
+          hamArrow1.classList.toggle("rotate");
           hamArrow2.classList.remove("rotate");
         }}
       >
@@ -64,7 +64,7 @@ export default function HamNav({ activeMenu, setActiveMenu }) {
         onClick={() => {
           setActiveMenu(activeMenu === "resources" ? "" : "resources");
           hamArrow1.classList.remove("rotate");
-          hamArrow2.classList.add("rotate");
+          hamArrow2.classList.toggle("rotate");
         }}
       >
         <div className="arrowed-title">

@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { useRef, useEffect } from "react";
 
 const THRESHOLD = 768;
-const arrow1 = document.getElementById("arrow1");
-const arrow2 = document.getElementById("arrow2");
-
 export default function Navbar({
   navOpen,
   activeMenu,
@@ -15,6 +12,8 @@ export default function Navbar({
   toggleNav,
 }) {
   const dropdownRef = useRef(null);
+  const arrow1 = document.getElementById("arrow1");
+  const arrow2 = document.getElementById("arrow2");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -38,7 +37,7 @@ export default function Navbar({
               className="menu"
               onClick={() => {
                 setActiveMenu(activeMenu === "features" ? "" : "features");
-                arrow1.classList.add("rotate");
+                arrow1.classList.toggle("rotate");
                 arrow2.classList.remove("rotate");
               }}
             >
@@ -85,7 +84,7 @@ export default function Navbar({
               onClick={() => {
                 setActiveMenu(activeMenu === "resources" ? "" : "resources");
                 arrow1.classList.remove("rotate");
-                arrow2.classList.add("rotate");
+                arrow2.classList.toggle("rotate");
               }}
             >
               <div className="list-title">

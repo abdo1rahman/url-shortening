@@ -84,7 +84,8 @@ nav * {
   stroke-width: 3px;
 }
 
-.arrow.rotate {
+.arrow.rotate,
+.ham-arrow.rotate {
   transform: rotate(180deg);
   transition: 0.3s;
 }
@@ -288,6 +289,9 @@ hr {
   width: 20%;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .shorten:hover {
@@ -452,12 +456,16 @@ footer {
   font-weight: 700;
 }
 
+.link:hover {
+  color: var(--cyan);
+}
+
 #facebook:hover > path {
   fill: rgb(26, 86, 239);
 }
 
 #x:hover > path {
-  fill: var(--cyan);
+  fill: hsl(195, 68%, 49%);
 }
 
 #pintrest:hover > path {
@@ -479,6 +487,10 @@ footer {
 
 .footer-icon:hover .icon-fill-base {
   opacity: 0;
+}
+
+footer.attribution a {
+  color: var(--cyan);
 }
 
 @media (max-width: 1000px) {
