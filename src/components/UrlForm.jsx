@@ -64,6 +64,7 @@ export default function UrlForm() {
             const shortUrl = data.result_url;
             setResults((prev) => [...prev, [url40, shortUrl]]);
             setUrl("");
+            setInputError("");
             setLoading(false);
           } else {
             console.error("API error:", data.error);
@@ -101,7 +102,7 @@ export default function UrlForm() {
         <div className="url-form">
           <input
             id="url-input"
-            className={inputError && "error"}
+            className={inputError.length > 0 && "error"}
             type="text"
             value={url}
             onChange={handleChange}
