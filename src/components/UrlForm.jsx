@@ -4,7 +4,7 @@ import Loader from "./Loader.jsx";
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
-  const [inputError, setInputError] = useState(false);
+  const [inputError, setInputError] = useState("");
   const [loading, setLoading] = useState(false);
   // Making sure the state of the shortened links persists even after page reload
   const [results, setResults] = useState(() => {
@@ -21,22 +21,41 @@ export default function UrlForm() {
   const handleChange = (e) => setUrl(e.target.value);
 
   const handleClick = (e) => {
-    e.preventDefault();
     if (url.length > 0) {
       setLoading(true);
-      setInputError(false);
-      const longUrl = url.trim();
-      const url40 =
-        longUrl.length > 40 ? longUrl.slice(0, 40) + "..." : longUrl;
 
-      if (!longUrl) return;
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(url)) {
+        setInputError("Looks like an email, not a URL.");
+        return;
+      }
+
+      let cleanedUrl = url.trim();
+      if (/^http:\/\//i.test(cleanedUrl)) {
+        cleanedUrl = cleanedUrl.replace(/^http:\/\//i, "https://");
+      } else if (!/^https:\/\//i.test(cleanedUrl)) {
+        cleanedUrl = "https://" + cleanedUrl;
+      }
+
+      try {
+        const longUrl = new URL(cleanedUrl);
+        setUrl(cleanedUrl);
+      } catch (err) {
+        setInputError("Invalid URL");
+        setLoading(false);
+        return;
+      }
+
+      const url40 =
+        cleanedUrl.length > 40 ? cleanedUrl.slice(0, 40) + "..." : cleanedUrl;
+
+      if (!cleanedUrl) return;
 
       fetch("https://shortly-api-78zc.onrender.com/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `url=${encodeURIComponent(longUrl)}`,
+        body: `url=${encodeURIComponent(cleanedUrl)}`,
       })
         .then((res) => res.json())
         .then((data) => {
@@ -50,7 +69,7 @@ export default function UrlForm() {
           }
         })
         .catch((err) => console.error("Network error:", err));
-    } else setInputError(true);
+    } else setInputError("Please add a link");
   };
 
   function copy(event, link) {
@@ -88,7 +107,7 @@ export default function UrlForm() {
             placeholder="Shorten a link here..."
             required
           />
-          {inputError && <p className="error-msg">Please add a link</p>}
+          {inputError.length > 0 && <p className="error-msg">{inputError}</p>}
 
           <button className="shorten" onClick={handleClick}>
             {loading ? <Loader /> : "Shorten it!"}
