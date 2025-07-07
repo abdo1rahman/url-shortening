@@ -26,6 +26,7 @@ export default function UrlForm() {
 
       if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(url)) {
         setInputError("Looks like an email, not a URL.");
+        setLoading(false);
         return;
       }
 
