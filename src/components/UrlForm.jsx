@@ -110,7 +110,11 @@ export default function UrlForm() {
             required
           />
           {inputError.length > 0 && <p className="error-msg">{inputError}</p>}
-
+          {loading && (
+            <p className="error-msg">
+              Please wait, the server might take long to load
+            </p>
+          )}
           <button className="shorten" onClick={handleClick}>
             {loading ? <Loader /> : "Shorten it!"}
           </button>
