@@ -15,6 +15,14 @@
   --violet: rgb(203, 26, 123);
 }
 
+* {
+  -webkit-tap-highlight-color: transparent; /* disable blue flicker on mobile */
+}
+
+button {
+  touch-action: manipulation;
+}
+
 body,
 html {
   position: relative;
