@@ -226,6 +226,10 @@ hr {
   height: fit-content;
 }
 
+section.form-section {
+  width: 100%;
+}
+
 .form-container {
   background: url(/images/bg-shorten-desktop.svg);
   background-size: cover;
@@ -298,14 +302,18 @@ hr {
   background-color: var(--translucent-cyan);
 }
 
+.all-results {
+  width: 100%;
+}
+
 .result {
   margin-top: 1rem;
   background-color: white;
+  align-self: center;
   border-radius: 5px;
-  width: 88vw;
+  width: 87%;
   position: relative;
   left: 5vw;
-  right: 5vw !important;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -356,12 +364,22 @@ hr {
 }
 
 .features-section .features-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
   text-align: center;
+
+  align-items: center;
   width: 30rem;
 }
 
 .features-section .features-title h2 {
   font-size: 30px;
+}
+
+.desc {
+  justify-content: center;
+  width: 60% !important;
 }
 
 .features {
@@ -538,6 +556,10 @@ footer.attribution a {
     padding: 1rem;
   }
 
+  .all-results {
+    width: 99%;
+  }
+
   .links-hr {
     display: block;
     width: 100%;
@@ -583,8 +605,8 @@ footer.attribution a {
 
   .features-section .features-title p {
     font-size: 13px;
-    padding: 0 2rem;
-    align-self: center;
+    justify-content: center;
+    width: 80%;
   }
 
   .features {
@@ -651,6 +673,11 @@ footer.attribution a {
     padding: 1rem;
     font-size: 20px;
   }
+
+  .all-results {
+    width: 97%;
+  }
+
   .boost {
     background: url(/images/bg-boost-mobile.svg);
     background-size: cover;
@@ -661,5 +688,9 @@ footer.attribution a {
 @media (max-width: 420px) {
   .boost h2 {
     font-size: 24px;
+  }
+
+  .all-results {
+    width: 94%;
   }
 }

@@ -47,7 +47,7 @@ export default function UrlForm() {
       }
 
       const url40 =
-        cleanedUrl.length > 40 ? cleanedUrl.slice(0, 40) + "..." : cleanedUrl;
+        cleanedUrl.length > 20 ? cleanedUrl.slice(0, 20) + "..." : cleanedUrl;
 
       if (!cleanedUrl) return;
 
@@ -97,7 +97,7 @@ export default function UrlForm() {
   }
 
   return (
-    <>
+    <section className="form-section">
       <div id="form-container" className="form-container">
         <div className="url-form">
           <input
@@ -120,32 +120,33 @@ export default function UrlForm() {
           </button>
         </div>
       </div>
-
-      <AnimatePresence>
-        {results.map(([long, short], i) => (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            transition="0.2s"
-            className="result"
-            key={i}
-          >
-            <p className="long-url">{long}</p>
-            <hr className="links-hr" />
-            <div>
-              <p className="short-url">{short}</p>
-              <button
-                className="copy"
-                aria-live="polite"
-                onClick={(event) => copy(event, short)}
-              >
-                Copy
-              </button>
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
-    </>
+      <div className="all-results">
+        <AnimatePresence>
+          {results.map(([long, short], i) => (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              transition="0.2s"
+              className="result"
+              key={i}
+            >
+              <p className="long-url">{long}</p>
+              <hr className="links-hr" />
+              <div>
+                <p className="short-url">{short}</p>
+                <button
+                  className="copy"
+                  aria-live="polite"
+                  onClick={(event) => copy(event, short)}
+                >
+                  Copy
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </section>
   );
 }

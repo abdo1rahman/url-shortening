@@ -67,7 +67,7 @@ function App() {
           <section className="features-section">
             <div className="features-title">
               <h2>Advanced Statistics</h2>
-              <p>
+              <p className="desc">
                 Track how your links are performing across the web with our
                 advanced statistics dashboard.
               </p>
